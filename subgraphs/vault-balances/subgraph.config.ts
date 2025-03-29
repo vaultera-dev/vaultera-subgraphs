@@ -7,7 +7,7 @@ import {
   Template,
 } from '@enzymefinance/subgraph-cli';
 
-import { getEnvironment } from '@enzymefinance/environment/deployments/all';
+import { getEnvironment } from '@enzymefinance/environment/all';
 import { Deployment } from '@enzymefinance/environment';
 
 interface Variables {
@@ -20,8 +20,6 @@ interface Variables {
 const name = 'enzyme-vault-balances';
 
 const deployments = {
-  arbitrum: getEnvironment(Deployment.ARBITRUM),
-  base: getEnvironment(Deployment.BASE),
   ethereum: getEnvironment(Deployment.ETHEREUM),
   polygon: getEnvironment(Deployment.POLYGON),
   testnet: getEnvironment(Deployment.TESTNET),
@@ -32,30 +30,20 @@ export const contexts: Contexts<Variables> = {
     name: `${name}-arbitrum`,
     network: 'arbitrum-one',
     variables: {
-      dispatcher: deployments.arbitrum.contracts.Dispatcher,
-      weth: deployments.arbitrum.namedTokens.weth.id,
+      dispatcher: '0x6242E80B4344897b644Eb48152c36AA35643CdAe',
+      weth: '0x82af49447d8a07e3bd95bd0d56f35241523fbab1',
       savingsDai: '0x0000000000000000000000000000000000000000',
-      start: deployments.arbitrum.deployment.inception,
-    },
-  },
-  base: {
-    name: `${name}-base`,
-    network: 'base',
-    variables: {
-      dispatcher: deployments.base.contracts.Dispatcher,
-      weth: deployments.base.namedTokens.weth.id,
-      savingsDai: '0x0000000000000000000000000000000000000000',
-      start: deployments.base.deployment.inception,
+      start: 302977549,
     },
   },
   ethereum: {
     name,
     network: 'mainnet',
     variables: {
-      dispatcher: deployments.ethereum.contracts.Dispatcher,
+      dispatcher: "0x1ceD23645550bE49003A12bdB61DCD3cbdBf7338",
       weth: deployments.ethereum.namedTokens.weth.id,
       savingsDai: '0x83f20f44975d03b1b09e64809b757c47f942beea',
-      start: deployments.ethereum.deployment.inception,
+      start: 22033364,
     },
   },
   polygon: {
@@ -65,7 +53,7 @@ export const contexts: Contexts<Variables> = {
       dispatcher: deployments.polygon.contracts.Dispatcher,
       weth: deployments.polygon.namedTokens.weth.id,
       savingsDai: '0x0000000000000000000000000000000000000000',
-      start: deployments.polygon.deployment.inception,
+      start: 26191606,
     },
   },
   testnet: {
@@ -75,7 +63,7 @@ export const contexts: Contexts<Variables> = {
       dispatcher: deployments.testnet.contracts.Dispatcher,
       weth: deployments.testnet.namedTokens.weth.id,
       savingsDai: '0x0000000000000000000000000000000000000000',
-      start: deployments.testnet.deployment.inception,
+      start: 25731749,
     },
   },
 };

@@ -1,0 +1,93 @@
+specVersion: 0.0.2
+schema:
+  file: schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: DispatcherDataSource
+    network: mainnet
+    source:
+      abi: DispatcherEvents
+      address: "0x1ceD23645550bE49003A12bdB61DCD3cbdBf7338"
+      startBlock: 22033364
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities: []
+      file: DispatcherDataSource/DispatcherDataSource.wasm
+      abis:
+        - name: DispatcherEvents
+          file: DispatcherDataSource/generated/abis/events/DispatcherEvents.json
+        - name: ERC20Sdk
+          file: DispatcherDataSource/generated/abis/sdks/ERC20Sdk.json
+      eventHandlers:
+        - event: VaultProxyDeployed(indexed address,indexed address,address,indexed
+            address,address,string)
+          handler: handleVaultProxyDeployed
+  - kind: ethereum/contract
+    name: AssetDataSource
+    network: mainnet
+    source:
+      abi: AssetEvents
+      startBlock: 22033364
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities: []
+      file: AssetDataSource/AssetDataSource.wasm
+      abis:
+        - name: AssetEvents
+          file: AssetDataSource/generated/abis/events/AssetEvents.json
+        - name: ERC20Sdk
+          file: AssetDataSource/generated/abis/sdks/ERC20Sdk.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+  - kind: ethereum/contract
+    name: SavingsDaiDataSource
+    network: mainnet
+    source:
+      abi: SavingsDaiEvents
+      address: "0x83f20f44975d03b1b09e64809b757c47f942beea"
+      startBlock: 22033364
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities: []
+      file: SavingsDaiDataSource/SavingsDaiDataSource.wasm
+      abis:
+        - name: SavingsDaiEvents
+          file: SavingsDaiDataSource/generated/abis/events/SavingsDaiEvents.json
+        - name: ERC20Sdk
+          file: SavingsDaiDataSource/generated/abis/sdks/ERC20Sdk.json
+      eventHandlers:
+        - event: Deposit(indexed address,indexed address,uint256,uint256)
+          handler: handleDeposit
+        - event: Withdraw(indexed address,indexed address,indexed address,uint256,uint256)
+          handler: handleWithdraw
+templates:
+  - kind: ethereum/contract
+    name: VaultDataSource
+    network: mainnet
+    source:
+      abi: VaultEvents
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities: []
+      file: templates/VaultDataSource/VaultDataSource.wasm
+      abis:
+        - name: VaultEvents
+          file: VaultDataSource/generated/abis/events/VaultEvents.json
+        - name: ERC20Sdk
+          file: VaultDataSource/generated/abis/sdks/ERC20Sdk.json
+      eventHandlers:
+        - event: TrackedAssetAdded(address)
+          handler: handleTrackedAssetAdded
+        - event: TrackedAssetRemoved(address)
+          handler: handleTrackedAssetRemoved
+        - event: EthReceived(indexed address,uint256)
+          handler: handleEthReceived

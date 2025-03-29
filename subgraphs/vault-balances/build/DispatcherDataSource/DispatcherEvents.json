@@ -1,0 +1,45 @@
+[
+  {
+    "type": "event",
+    "anonymous": false,
+    "name": "VaultProxyDeployed",
+    "inputs": [
+      {
+        "type": "address",
+        "name": "fundDeployer",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "type": "address",
+        "name": "owner",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "type": "address",
+        "name": "vaultProxy",
+        "indexed": false,
+        "internalType": "address"
+      },
+      {
+        "type": "address",
+        "name": "vaultLib",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "type": "address",
+        "name": "vaultAccessor",
+        "indexed": false,
+        "internalType": "address"
+      },
+      {
+        "type": "string",
+        "name": "fundName",
+        "indexed": false,
+        "internalType": "string"
+      }
+    ]
+  }
+]
